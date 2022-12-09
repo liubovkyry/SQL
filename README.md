@@ -1,4 +1,4 @@
-# <a href="https://app.datacamp.com/learn/skill-tracks/sql-fundamentals" target="_blank">SQL Fundamentals</a>
+<h1><a href="https://app.datacamp.com/learn/skill-tracks/sql-fundamentals" target="_blank">SQL Fundamentals</a></h1>
 
 <h3>Course contains of:</h3>
 <p><ul>
