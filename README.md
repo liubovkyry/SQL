@@ -1,6 +1,9 @@
-<h1><a href="https://app.datacamp.com/learn/skill-tracks/sql-fundamentals" target="_blank">SQL Fundamentals</a></h1>
+<h2><a href="https://www.sqlstyle.guide/">SQL Style Guide</a></h2>
+<p>SQL Style Guide by Simon Holywell</p>
 
-<h3>Course content:</h3>
+<h2><a href="https://app.datacamp.com/learn/skill-tracks/sql-fundamentals" target="_blank">SQL Fundamentals</a></h2>
+
+<h4>Course content:</h4>
 <p><ul>
 <li>Introduction to SQL</li>
 <li>Intermediate SQL</li>
