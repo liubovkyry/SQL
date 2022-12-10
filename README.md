@@ -1,3 +1,4 @@
+
 <h2><a href="https://www.sqlstyle.guide/">SQL Style Guide</a></h2>
 <p>SQL Style Guide by Simon Holywell</p>
 
@@ -11,3 +12,7 @@
 <li>Data Manipulation in SQL</li>
 <li>PostgreSQL Summary Stats and Window Functions</li>
 <li>Functions for Manipulating Data in PostgreSQL</li></ul></p>
+
+https://www.w3schools.com/
+
+http://sqlfiddle.com/
