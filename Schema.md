@@ -9,13 +9,13 @@
   </div>
   <div class="toc">
     <dl class="toc">
-      <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-CREATE">5.9.1. Creating a Schema</a></span></dt>
-      <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-PUBLIC">5.9.2. The Public Schema</a></span></dt>
-      <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-PATH">5.9.3. The Schema Search Path</a></span></dt>
-      <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-PRIV">5.9.4. Schemas and Privileges</a></span></dt>
-      <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-CATALOG">5.9.5. The System Catalog Schema</a></span></dt>
-      <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-PATTERNS">5.9.6. Usage Patterns</a></span></dt>
-      <dt><span class="sect2"><a href="ddl-schemas.html#DDL-SCHEMAS-PORTABILITY">5.9.7. Portability</a></span></dt>
+      <dt><span class="sect2">5.9.1. Creating a Schema</span></dt>
+      <dt><span class="sect2">5.9.2. The Public Schema</span></dt>
+      <dt><span class="sect2">5.9.3. The Schema Search Path</span></dt>
+      <dt><span class="sect2">5.9.4. Schemas and Privileges</span></dt>
+      <dt><span class="sect2">5.9.5. The System Catalog Schema</span></dt>
+      <dt><span class="sect2">5.9.6. Usage Patterns</span></dt>
+      <dt><span class="sect2">5.9.7. Portability</span></dt>
     </dl>
   </div><a id="id-1.5.4.11.2" class="indexterm" name="id-1.5.4.11.2"></a>
   <p>A <span class="productname">PostgreSQL</span> database cluster contains one or more named databases. Roles and a few other object types are shared across the entire cluster. A client connection to the server can only access data in a single database, the one specified in the connection request.</p>
