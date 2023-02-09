@@ -213,8 +213,6 @@ REVOKE CREATE ON SCHEMA public FROM PUBLIC;
   </div>
 </div>
 
-
-          </div>
           
            
   </body>
