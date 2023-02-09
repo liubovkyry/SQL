@@ -1,4 +1,4 @@
-<!-- https://www.postgresql.org/docs/current/ddl-schemas.html -->
+https://www.postgresql.org/docs/current/ddl-schemas.html
 <div class="sect1" id="DDL-SCHEMAS">
   <div class="titlepage">
     <div>
