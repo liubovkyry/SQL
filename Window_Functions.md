@@ -19,3 +19,10 @@ The same results can be generated using the clause common to all window function
 Another simple type of column you can generate with a window function is a RANK. A RANK simply creates a column numbering your data set from highest to lowest, or lowest to highest, based on a column that you specify.
 
 To create the rank, you start with the RANK function, using parentheses, followed by the OVER clause. Inside the OVER clause, include the ORDER BY clause, and the column or columns you want to use to generate the rank. By default, the RANK function orders the results and ranking from smallest to largest values. In the case of our data set here, this isn't particularly informative.
+
+![image](https://user-images.githubusercontent.com/118057504/219617173-873cdd3e-a995-4cc8-97f5-b96550be288b.png)
+
+You can easily correct this by adding the DESC function to reverse the order of the rank, just as you would if you were using ORDER BY at the end of your query. You'll notice that the RANK function automatically ties identical values, such as the first 2 results, and then skips the next value in the rank.
+
+
+![image](https://user-images.githubusercontent.com/118057504/219617646-8e75ba00-12ed-417b-8b38-0355a8f6a934.png)
