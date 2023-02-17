@@ -96,3 +96,68 @@ Let's expand on the previous question, and instead ask, "How many goals were sco
 
 The result set returns the average goals scored broken out by season and country. In row 1, a match was played in Belgium in the 2011/2012 season, and had 1 goal scored throughout the match. This is compared to the 2.88, which is the average goals scored in Belgium in the 2011/2012 season.
 
+CODE SAMPLES:
+
+The PARTITION BY clause allows you to calculate separate "windows" based on columns you want to divide your results. For example, you can create a single column that calculates an overall average of goals scored for each season.
+```
+SELECT
+	date,
+	season,
+	home_goal,
+	away_goal,
+	CASE WHEN hometeam_id = 8673 THEN 'home' 
+		 ELSE 'away' END AS warsaw_location,
+    -- Calculate the average goals scored partitioned by season
+    AVG(home_goal) OVER(PARTITION BY season) AS season_homeavg,
+    AVG(away_goal) OVER(PARTITION BY season) AS season_awayavg
+FROM match
+-- Filter the data set for Legia Warszawa matches only
+WHERE 
+	hometeam_id = 8673 
+    OR awayteam_id = 8673
+ORDER BY (home_goal + away_goal) DESC;
+```
+The PARTITION BY clause can be used to break out window averages by multiple data points (columns). You can even calculate the information you want to use to partition your data! For example, you can calculate average goals scored by season and by country, or by the calendar year (taken from the date column).
+```
+SELECT 
+	date,
+	season,
+	home_goal,
+	away_goal,
+	CASE WHEN hometeam_id = 8673 THEN 'home' 
+         ELSE 'away' END AS warsaw_location,
+	-- Calculate average goals partitioned by season and month
+    AVG(home_goal) OVER(PARTITION BY season, 
+         	EXTRACT(month FROM date)) AS season_mo_home,
+    AVG(away_goal) OVER(PARTITION BY season, 
+         	EXTRACT(month FROM date)) AS season_mo_away
+FROM match
+WHERE 
+	hometeam_id = 8673
+    OR awayteam_id = 8673
+ORDER BY (home_goal + away_goal) DESC;
+```
+
+## Sliding windows
+In addition to calculating aggregate and rank information, window functions can also be used to calculate information that changes with each subsequent row in a data set.
+
+These types of window functions are called sliding windows. Sliding windows are functions that perform calculations relative to the current row of a data set. You can use sliding windows to calculate a wide variety of information that aggregates one row at a time down your data set -- running totals, sums, counts, and averages in any order you need. A sliding window calculation can also be partitioned by one or more columns, just like a non-sliding window.
+
+The general syntax looks like this -- you use the phrase ROWS BETWEEN to indicate that you plan on slicing information in your window function for each row in the data set, and then you specify the starting and finishing point of the calculation. For the start and finish in your ROWS BETWEEN statement, you can specify a number of keywords as shown here. PRECEDING and FOLLOWING are used to specify the number of rows before, or after, the current row that you want to include in a calculation. UNBOUNDED PRECEDING and UNBOUNDED FOLLOWING tell SQL that you want to include every row since the beginning, or the end, of the data set in your calculations. Finally, CURRENT ROW tells SQL that you want to stop your calculation at the current row.
+![image](https://user-images.githubusercontent.com/118057504/219634201-f7f8b1cf-5191-4fdb-96f9-546f98baacd3.png)
+
+The sliding window in this query includes several key pieces of information in its calculation. It first states that the goal is to calculate a sum of goals scored when Manchester City played as the home team during the 2011/2012 season. It then tells you that you want to turn this calculation into a running total, ordered by the date of the match from oldest to most recent and calculated from the beginning of the data set to the current row. 
+
+![image](https://user-images.githubusercontent.com/118057504/219634518-a17cc7b9-3302-4bf1-984d-f66fffed0e3c.png)
+
+Using the PRECEDING statement, you also have the ability to calculate sliding windows with a more limited frame. For example, the query you see here is similar to the previous one, with a slightly modified sliding window. The phrase UNBOUNDED PRECEDING is replaced here with the phrase 1 PRECEDING, which calculates the sum of Manchester City's goals in the current and previous match. As you see in the data set here, the two rows in red are used to calculate the sum on the second row, and the two rows in green are used to calculate the sum on the third row.
+![image](https://user-images.githubusercontent.com/118057504/219635374-e2de533a-78c4-4f89-b3a9-5a4927603174.png)
+
+CODE SAMPLES:
+
+Sliding windows allow you to create running calculations between any two points in a window using functions such as PRECEDING, FOLLOWING, and CURRENT ROW. You can calculate running counts, sums, averages, and other aggregate functions between any two points you specify in the data set.
+
+
+
+
+
