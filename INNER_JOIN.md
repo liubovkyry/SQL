@@ -62,4 +62,60 @@ We can limit the records returned by supplying an additional field to join on by
 
 <img src='https://user-images.githubusercontent.com/118057504/219974913-72664b57-5edc-4505-8b2a-e0990b581b5e.png' width=650 height=400>
 
+### Joining multiple tables
+You've seen that the ability to combine multiple joins using a single query is a powerful feature of SQL.
 
+Suppose you are interested in the relationship between fertility (populations) and unemployment (economies) rates. Your task in this exercise is to join tables to return the country name, year, fertility rate, and unemployment rate in a single result from the countries, populations and economies tables.
+
+STEP 1
+ - Perform an inner join of countries AS c (left) with populations AS p (right), on code.
+ - Select name, year and fertility_rate.
+```
+-- Select relevant fields
+SELECT name, year, fertility_rate
+-- Inner join countries and populations, aliased, on code
+FROM populations AS p
+INNER JOIN countries AS c
+ON c.code = p.country_code;
+```
+![image](https://user-images.githubusercontent.com/118057504/219975347-31be0543-edf0-4d54-8075-6ae8648e6859.png)
+
+STEP 2
+ - Chain another inner join to your query with the economies table AS e, using code.
+ - Select name, and using table aliases, select year and unemployment_rate from economies.
+
+```
+-- Select fields
+SELECT name, e.year, fertility_rate, e.unemployment_rate
+FROM populations AS p
+INNER JOIN countries AS c
+ON p.country_code = c.code
+-- Join to economies (as e)
+INNER JOIN economies AS e
+-- Match on country code
+ON p.country_code = e.code;
+```
+![image](https://user-images.githubusercontent.com/118057504/219975524-ba3cfb15-3118-453c-bcc9-4b0ad7357f3e.png)
+
+### Checking multi-table joins
+Have a look at the results for Albania from the previous query below. You can see that the 2015 fertility_rate has been paired with 2010 unemployment_rate, and vice versa.
+```
+name	   year	fertility_rate	unemployment_rate
+Albania	2015	1.663	         17.1
+Albania	2010	1.663	         14
+Albania	2015	1.793	         17.1
+Albania	2010	1.793	         14
+```
+Instead of four records, the query should return two: one for each year. The last join was performed on <code>c.code = e.code</code>, without also joining on <code>year</code>. Your task in this exercise is to fix your query by explicitly stating that both the country <code>code</code> and <code>year</code> should match!
+
+```
+SELECT name, e.year, fertility_rate, unemployment_rate
+FROM countries AS c
+INNER JOIN populations AS p
+ON c.code = p.country_code
+INNER JOIN economies AS e
+ON c.code = e.code
+-- Add an additional joining condition such that you are also joining on year
+AND p.year = e.year;
+```
+![image](https://user-images.githubusercontent.com/118057504/219975727-0d112cf5-1871-4291-85e8-ccf2a67c6cd6.png)
