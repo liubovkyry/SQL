@@ -73,7 +73,7 @@ WHERE m.hometeam_id = 8634;
 If you want to test multiple logical conditions in a CASE statement, you can use AND inside your WHEN clause. 
 For example, let's see if each match was played, and won, by the team Chelsea. Let's see the CASE statement in this query. Each WHEN clause contains two logical tests.
 
-![image](https://user-images.githubusercontent.com/118057504/219963447-4a6330c1-60b4-4f49-acef-6db83c28babd.png)
+<img src='https://user-images.githubusercontent.com/118057504/219963447-4a6330c1-60b4-4f49-acef-6db83c28babd.png' width=600 height=500>
 
 When testing logical conditions, it's important to carefully consider which rows of your data are part of your ELSE clause, and if they're categorized correctly.
 Here, we specify this by using an OR statement in WHERE, which retrieves only results where the id 8455 is present in the hometeam_id or awayteam_id columns. 
@@ -81,16 +81,33 @@ Here, we specify this by using an OR statement in WHERE, which retrieves only re
 ## What's NULL?
 It's also important to consider what your ELSE clause is doing. These two queries here are identical, except for the ELSE NULL statement specified in the second. They both return identical results - a table with quite a few null results. But what if you want to exclude them?
 
-![image](https://user-images.githubusercontent.com/118057504/219964114-cf51d817-59be-4818-ba9e-dac0aa49493f.png)
+<img src='https://user-images.githubusercontent.com/118057504/219964114-cf51d817-59be-4818-ba9e-dac0aa49493f.png' width=600 height=500>
 
 
 Let's say we're only interested in viewing the results of games where Chelsea won, and we don't care if they lose or tie. Simply removing the ELSE clause will still retrieve those results - and a lot of NULL values.
 
-![image](https://user-images.githubusercontent.com/118057504/219964167-9e2759d7-2d8a-499f-8f8d-207c8e5b3326.png)
+<img src='https://user-images.githubusercontent.com/118057504/219964167-9e2759d7-2d8a-499f-8f8d-207c8e5b3326.png' width=600 height=500>
 
 
 
 To correct for this, you can treat the entire CASE statement as a column to filter by in your WHERE clause, just like any other column. In order to filter a query by a CASE statement, you include the entire CASE statement, except its alias, in WHERE. You then specify what you want to include, or exclude. For this query, I want to keep all rows where this CASE statement IS NOT NULL. My resulting table now only includes Chelsea's home and away wins -- and I don't need to filter by their team ID anymore!
 
-![image](https://user-images.githubusercontent.com/118057504/219964227-ce9eb397-7814-4130-9263-ebffb4b72012.png)
+<img src='https://user-images.githubusercontent.com/118057504/219964227-ce9eb397-7814-4130-9263-ebffb4b72012.png' width=600 height=500>
+
+
+## CASE WHEN with aggregate functions
+
+<img src='https://user-images.githubusercontent.com/118057504/219964314-414f8d7e-ac4f-4249-b2ae-0ce8278a732f.png' width=600 height=300>
+
+<img src='https://user-images.githubusercontent.com/118057504/219964585-e5932da7-1e1a-4c69-807b-ef0cd23c923b.png' width=600 height=500>
+
+<img src='https://user-images.githubusercontent.com/118057504/219964676-161e0e49-58c3-4b92-b94d-aa0b84f214ff.png' width=600 height=500>
+
+<img src='https://user-images.githubusercontent.com/118057504/219964705-c0e72237-5ea8-4f3a-8ff4-457988f05114.png' width=600 height=500>
+
+<img src='https://user-images.githubusercontent.com/118057504/219964723-e40510de-1a6d-4153-8013-1bce6dc721a2.png' width=600 height=500>
+
+<img src='https://user-images.githubusercontent.com/118057504/219964763-f25f33d9-08db-4e4c-a78c-5ae43c351fdb.png' width=600 height=500>
+
+
 
