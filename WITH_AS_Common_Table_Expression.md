@@ -13,9 +13,21 @@ Let's rewrite a query by using a CTE. The query you see below uses a subquery, s
 
 In order to rewrite this query using a common table expression to represent the subquery, simply take the subquery out of the FROM clause, place it <i>at the beginning of your query</i>, declare it using the syntax <code>WITH</code>, followed by a CTE name, and AS. So, here we're starting our CTE, s, by stating WITH s <code>AS</code>, and then placing the subquery inside parentheses. It's now a common table expression!
 
-<img src='https://user-images.githubusercontent.com/118057504/219970187-431480fa-f44a-4cd6-a440-58f9ff629078.png' width=600 height=350>
+<img src='https://user-images.githubusercontent.com/118057504/219970187-431480fa-f44a-4cd6-a440-58f9ff629078.png' width=600 height=300>
 
 Finally, complete the rest of the query the same way you would if the CTE were an existing table in the database. You select the country name from the country table, count the number of matches in the CTE "s", <code>JOIN</code> "s" to the country table, and then group the results by the country name's alias. 
 The results - you guessed it - are identical to the previous query setup!
 
 <img src='https://user-images.githubusercontent.com/118057504/219970276-bc9af9e9-a45b-410a-a846-390a987b0975.png' width=600 height=400>
+
+If you have multiple subqueries that you want to turn into a common table expression, you can simply list them one after another, with a comma in between each CTE, and NO comma after the last one. You can then retrieve the information you need into the main query - just make sure you properly join this second CTE as well!
+
+<img src='https://user-images.githubusercontent.com/118057504/219970365-c43db5af-fa3d-4e19-96ff-19f1830c12fc.png' width=600 height=400>
+
+## Why use CTEs?
+
+So why are we learning yet another method of producing the same result in a SQL query? Common table expressions have numerous benefits over a subquery written inside your main query.
+ - First, the CTE is run only once, and then stored in memory, so it often leads to an improvement in the amount of time it takes to run your query. 
+ - Second, CTEs are an excellent tool for organizing long and complex CTEs. You can declare as many CTEs as you need, one after another.
+ - You can also reference information in CTEs declared earlier. For example, if you have 3 CTEs in a query, your third CTE can retrieve information from the first and second CTE. 
+ - Finally, a CTE can reference itself in a special kind of table called a recursive CTE. 
