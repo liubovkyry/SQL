@@ -109,5 +109,39 @@ To correct for this, you can treat the entire CASE statement as a column to filt
 
 <img src='https://user-images.githubusercontent.com/118057504/219964763-f25f33d9-08db-4e4c-a78c-5ae43c351fdb.png' width=600 height=500>
 
+## COUNT and CASE WHEN with multiple conditions
+
+In R or Python, you have the ability to calculate a SUM of logical values (i.e., TRUE/FALSE) directly. In SQL, you have to convert these values into 1 and 0 before calculating a sum. This can be done using a CASE statement.
+
+There's one key difference when using SUM to aggregate logical values compared to using COUNT in the previous exercise --
+
+Your goal here is to use the country and match table to determine the total number of matches won by the home team in each country during the 2012/2013, 2013/2014, and 2014/2015 seasons.
+
+![image](https://user-images.githubusercontent.com/118057504/219965099-7d63de50-29b2-4c82-8a25-ecdd353d2d02.png)
+
+![image](https://user-images.githubusercontent.com/118057504/219965113-ca7d3702-214c-4d3d-b145-20f96839eae4.png)
+
+ - Create 3 CASE statements to "count" matches in the '2012/2013', '2013/2014', and '2014/2015' seasons, respectively.
+ - Have each CASE statement return a 1 for every match you want to include, and a 0 for every match to exclude.
+ - Wrap the CASE statement in a SUM to return the total matches played in each season.
+ - Group the query by the country name alias.
+ 
+ ```
+ SELECT 
+	c.name AS country,
+    -- Sum the total records in each season where the home team won
+	SUM(CASE WHEN m.season = '2012/2013' AND m.home_goal > m.away_goal 
+        THEN 1 ELSE 0 END) AS matches_2012_2013,
+ 	SUM(CASE WHEN m.season = '2013/2014' AND m.home_goal > m.away_goal 
+        THEN 1 ELSE 0 END) AS matches_2013_2014,
+	SUM(CASE WHEN m.season = '2014/2015' AND m.home_goal > m.away_goal 
+        THEN 1 ELSE 0 END) AS matches_2014_2015
+FROM country AS c
+LEFT JOIN match AS m
+ON c.id = m.country_id
+-- Group by country name alias
+GROUP BY country;
+```
+![image](https://user-images.githubusercontent.com/118057504/219965182-f9cc2a25-c137-4a38-9105-d2176ff1b08e.png)
 
 
