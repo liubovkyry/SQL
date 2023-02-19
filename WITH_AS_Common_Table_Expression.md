@@ -32,6 +32,11 @@ So why are we learning yet another method of producing the same result in a SQL 
  - You can also reference information in CTEs declared earlier. For example, if you have 3 CTEs in a query, your third CTE can retrieve information from the first and second CTE. 
  - Finally, a CTE can reference itself in a special kind of table called a recursive CTE. 
 
+
+ ![image](https://user-images.githubusercontent.com/118057504/219970683-8c93f88a-f92c-43e2-98b0-1011c574abb9.png)
+ ![image](https://user-images.githubusercontent.com/118057504/219970696-b3277492-0e4f-4508-bc0c-6a1a4c227716.png)
+
+
 ### Clean up with CTEs
 
 Previuously we generated a list of countries and the number of matches in each country with more than 10 total goals. The query in that exercise utilized a subquery in the FROM statement in order to filter the matches before counting them in the main query. Below is the query you created:
@@ -55,9 +60,6 @@ In this exercise, let's rewrite a similar query using a CTE.
  - Select the country_id and match id from the match table in your CTE.
  - Left join the CTE to the league table using country_id.
  
- ![image](https://user-images.githubusercontent.com/118057504/219970683-8c93f88a-f92c-43e2-98b0-1011c574abb9.png)
- ![image](https://user-images.githubusercontent.com/118057504/219970696-b3277492-0e4f-4508-bc0c-6a1a4c227716.png)
-
 ```
 -- Set up your CTE
 WITH match_list AS (
@@ -77,4 +79,38 @@ GROUP BY l.name;
 ```
 
 ![image](https://user-images.githubusercontent.com/118057504/219970734-d79f28f8-350f-40be-ad79-80911b701c89.png)
+
+### CTEs with nested subqueries
+If you find yourself listing multiple subqueries in the FROM clause with nested statement, your query will likely become long, complex, and difficult to read.
+
+Since many queries are written with the intention of being saved and re-run in the future, proper organization is key to a seamless workflow. Arranging subqueries as CTEs will save you time, space, and confusion in the long run!
+
+ - Declare a CTE that calculates the total goals from matches in August of the 2013/2014 season.
+ - Left join the CTE onto the league table using country_id from the match_list CTE.
+ - Filter the list on the inner subquery to only select matches in August of the 2013/2014 season.
+
+```
+-- Set up your CTE
+WITH match_list AS (
+    SELECT 
+  		country_id,
+  	   (home_goal + away_goal) AS goals
+    FROM match
+  	-- Create a list of match IDs to filter data in the CTE
+    WHERE id IN (
+       SELECT id
+       FROM match
+       WHERE season = '2013/2014' AND EXTRACT(MONTH FROM date) = 8))
+-- Select the league name and average of goals in the CTE
+SELECT 
+	l.name,
+    avg(match_list.goals)
+FROM league AS l
+-- Join the CTE onto the league table
+LEFT JOIN match_list ON l.id = match_list.country_id
+GROUP BY l.name;
+```
+![image](https://user-images.githubusercontent.com/118057504/219970933-f2f80c34-7ffc-4d31-a2df-33463d8055fd.png)
+
+### 
 
