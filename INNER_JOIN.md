@@ -4,17 +4,17 @@ INNER JOIN, along with LEFT JOIN makes up one of the two most common joins.
 
 The INNER JOIN shown looks for records in both tables with the same values in the key field, id.
 
-![image](https://user-images.githubusercontent.com/118057504/219973584-61cc15b5-f892-41ed-b977-cd7f0fb891b5.png)
+<img src='https://user-images.githubusercontent.com/118057504/219973584-61cc15b5-f892-41ed-b977-cd7f0fb891b5.png' width=600 height=400>
 
 Throughout this course, we'll work with a database of world leaders. Our database schema is displayed here. It contains the presidents, prime_ministers and monarchs tables, as well as the states table containing independence years, and the prime_minister_terms table, providing years the prime_ministers assumed office.
 
-![image](https://user-images.githubusercontent.com/118057504/219973641-19652f1a-c5de-40fb-92bf-551d4a2f698f.png)
+<img src='https://user-images.githubusercontent.com/118057504/219973641-19652f1a-c5de-40fb-92bf-551d4a2f698f.png' width=650 height=400>
 
-![image](https://user-images.githubusercontent.com/118057504/219973718-85b80ab9-59b0-49b2-99ec-7cd13fd02d12.png)
+<img src='https://user-images.githubusercontent.com/118057504/219973718-85b80ab9-59b0-49b2-99ec-7cd13fd02d12.png' width=650 height=400>
 
-![image](https://user-images.githubusercontent.com/118057504/219973768-956b1fc0-c2a8-4939-aa25-2570e95de2aa.png)
-![image](https://user-images.githubusercontent.com/118057504/219973784-474d4528-b31e-4433-8393-082ddbc0afa2.png)
-![image](https://user-images.githubusercontent.com/118057504/219973804-b302a816-216e-4503-b939-63399fd50c75.png)
+<img src='https://user-images.githubusercontent.com/118057504/219973768-956b1fc0-c2a8-4939-aa25-2570e95de2aa.png' width=650 height=400>
+<img src='https://user-images.githubusercontent.com/118057504/219973784-474d4528-b31e-4433-8393-082ddbc0afa2.png' width=650 height=400>
+<img src='https://user-images.githubusercontent.com/118057504/219973804-b302a816-216e-4503-b939-63399fd50c75.png' width=650 height=400>
 
 ### Joining with aliased tables
 Recall from the video that instead of writing full table names in queries, you can use table aliasing as a shortcut. The alias can be used in other parts of your query, such as the SELECT statement!
@@ -40,4 +40,26 @@ INNER JOIN economies AS e
 ON c.code=e.code;        -- USING(code)
 ```
 ![image](https://user-images.githubusercontent.com/118057504/219973973-ba9eba76-6bf5-4683-94ad-5e9a00f9dc87.png)
+
+## Multiple joins
+
+A powerful feature of SQL is that multiple joins can be combined and run in a single query. Let's have a look at some syntax for multiple joins. We begin with the same INNER JOIN as before, and then chain another INNER JOIN to the result of our first INNER JOIN. Notice that we use left_table-dot-id in the last line of this example. If we want to perform the second join using the id field of right_table rather than left_table, we can replace left_table-dot-id with right_table-dot-id in the final line.
+
+<img src='https://user-images.githubusercontent.com/118057504/219974252-d580dd07-b2ba-4b21-98ce-e635bf342d3a.png' width=650 height=400>
+
+Let's say that we are interested in identifying countries of the world that have both a president and a prime minister, and want to know the year each prime minister came into office. Let's have a look at the prime_minister_terms table from our database of world leaders. It contains a prime_minister column with prime minister names as well as a pm_start column containing the start year of a prime minister's term.
+
+<img src='https://user-images.githubusercontent.com/118057504/219974507-04b11dd2-b1de-4df3-8bb1-33aaf90a4a4f.png' width=650 height=400>
+<img src='https://user-images.githubusercontent.com/118057504/219974647-39fc268a-f5d6-42d4-887e-338bfeaca4f1.png' width=650 height=400>
+<img src='https://user-images.githubusercontent.com/118057504/219974670-5a9e1fb1-562c-4a16-a524-fb12cd4382ab.png' width=650 height=400>
+<img src='https://user-images.githubusercontent.com/118057504/219974713-0c70e939-bd91-46ee-bf02-1d5ba54bfe1e.png' width=650 height=400>
+
+One more thing to know about joins is that it isn't always the case that each value in the field being joined on corresponds to exactly one record in the joining field of the right table. In the example shown, if we join on one field as we have done before, the query will return multiple records from right_table that match with left_table on the id field.
+
+<img src='https://user-images.githubusercontent.com/118057504/219974735-22e379ee-4ba5-4a6d-a00f-3bbc2d688965.png' width=650 height=400>
+
+We can limit the records returned by supplying an additional field to join on by adding the AND keyword to our ON clause. In this example, we join on date, a frequently used second column when joining on multiple fields. The result set now contains records that match on both id AND date.
+
+<img src='https://user-images.githubusercontent.com/118057504/219974913-72664b57-5edc-4505-8b2a-e0990b581b5e.png' width=650 height=400>
+
 
