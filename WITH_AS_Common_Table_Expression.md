@@ -112,5 +112,4 @@ GROUP BY l.name;
 ```
 ![image](https://user-images.githubusercontent.com/118057504/219970933-f2f80c34-7ffc-4d31-a2df-33463d8055fd.png)
 
-### 
 
