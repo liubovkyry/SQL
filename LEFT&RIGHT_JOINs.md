@@ -45,6 +45,101 @@ The result contains null values where countries have presidents but no prime min
 
 ## 8. LEFT JOIN or RIGHT JOIN?
 
-Now that you're familiar with both LEFT and RIGHT JOIN, let's discuss why RIGHT JOIN is less commonly used. A key reason for this is that a RIGHT JOIN can always be re-written as a LEFT JOIN. Because we typically type from left to right, LEFT JOIN feels more intuitive to most users when constructing queries.
+Now that you're familiar with both LEFT and RIGHT JOIN, let's discuss why RIGHT JOIN is less commonly used. A key reason for this is that a <i>RIGHT JOIN can always be re-written as a LEFT JOIN.</i> Because we typically type from left to right, LEFT JOIN feels more intuitive to most users when constructing queries.
 
 ## 9. Let's practice!
+
+In this exercise, you'll explore the differences between INNER JOIN and LEFT JOIN. This will help you decide which type of join to use.
+
+Perform an inner join with cities AS c1 on the left and countries as c2 on the right.
+Use code as the field to merge your tables on
+
+
+```
+SELECT 
+    c1.name AS city,
+    code,
+    c2.name AS country,
+    region,
+    city_proper_pop
+FROM cities AS c1
+-- Perform an inner join with cities as c1 and countries as c2 on country code
+INNER JOIN countries AS c2
+ON c1.country_code = c2.code
+ORDER BY code DESC;
+```
+![image](https://user-images.githubusercontent.com/118057504/234125241-15c24d26-e2f2-4687-aa80-9962aec73c4d.png)
+
+Change the code to perform a LEFT JOIN instead of an INNER JOIN.
+After executing this query, have a look at how many records the query result contains.
+
+```
+SELECT 
+	c1.name AS city, 
+    code, 
+    c2.name AS country,
+    region, 
+    city_proper_pop
+FROM cities AS c1
+-- Join right table (with alias)
+LEFT JOIN countries AS c2
+ON c1.country_code = c2.code
+ORDER BY code DESC;
+```
+
+![image](https://user-images.githubusercontent.com/118057504/234125416-1a2a92c2-6930-4988-838a-68e0fbc8bf79.png)
+
+### Building on your LEFT JOIN
+
+Being able to build more than one SQL function into your query will enable you to write compact, supercharged queries.
+
+You will use AVG() in combination with a LEFT JOIN to determine the average gross domestic product (GDP) per capita by region in 2010.
+
+Complete the LEFT JOIN with the countries table on the left and the economies table on the right on the code field.
+Filter the records from the year 2010.
+
+```
+SELECT name, region, gdp_percapita
+FROM countries AS c
+LEFT JOIN economies AS e
+-- Match on code fields
+USING(code)
+-- Filter for the year 2010
+WHERE year = 2010;
+```
+![image](https://user-images.githubusercontent.com/118057504/234125958-b0eb9c6e-72d3-4410-8580-991f716ddc4a.png)
+
+To calculate per capita GDP per region, begin by grouping by region.
+After your GROUP BY, choose region in your SELECT statement, followed by average GDP per capita using the AVG() function, with AS avg_gdp as your alias.
+
+```
+-- Select region, and average gdp_percapita as avg_gdp
+SELECT region, AVG(gdp_percapita) AS avg_gdp
+FROM countries AS c
+LEFT JOIN economies AS e
+USING(code)
+WHERE year = 2010
+-- Group by region
+GROUP BY region;
+```
+![image](https://user-images.githubusercontent.com/118057504/234126263-86adb52b-336f-40b1-af8d-aa3ab78776a8.png)
+
+Order the result set by the average GDP per capita from highest to lowest.
+Return only the first 10 records in your result.
+
+```
+SELECT region, AVG(gdp_percapita) AS avg_gdp
+FROM countries AS c
+LEFT JOIN economies AS e
+USING(code)
+WHERE year = 2010
+GROUP BY region
+-- Order by descending avg_gdp
+ORDER BY avg_gdp DESC
+-- Return only first 10 records
+LIMIT 10;
+```
+![image](https://user-images.githubusercontent.com/118057504/234126458-282034be-2130-4eaa-94cc-c657a37df983.png)
+
+
+
