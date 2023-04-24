@@ -141,5 +141,25 @@ LIMIT 10;
 ```
 ![image](https://user-images.githubusercontent.com/118057504/234126458-282034be-2130-4eaa-94cc-c657a37df983.png)
 
+### Is this RIGHT?
 
+Write a new query using RIGHT JOIN that produces an identical result to the LEFT JOIN provided.
+```
+SELECT countries.name AS country, languages.name AS language, percent
+FROM languages
+LEFT JOIN countries
+USING(code)
+ORDER BY language;
+```
+![image](https://user-images.githubusercontent.com/118057504/234126927-9c5595bd-662b-4d6c-98ac-01d7f4e051eb.png)
+
+```
+SELECT countries.name AS country, languages.name AS language, percent
+FROM languages
+RIGHT JOIN countries
+USING(code)
+ORDER BY language;
+```
+
+![image](https://user-images.githubusercontent.com/118057504/234127029-3490778c-1c1a-495d-aed7-6ff9f7247955.png)
 
