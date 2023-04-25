@@ -43,3 +43,59 @@ Here is a look at our result. Note that there are null values in both the prime_
 ![image](https://user-images.githubusercontent.com/118057504/234128514-718c0b3b-8075-4ccd-9b40-d952607d3838.png)
 
 ## 10. Let's practice!
+
+Comparing joins
+In this exercise, you'll examine how results can differ when performing a full join compared to a left join and inner join by joining the countries and currencies tables. You'll be focusing on the North American region and records where the name of the country is missing.
+
+You'll begin with a full join with countries on the left and currencies on the right. Recall the workings of a full join with the diagram below!
+![image](https://user-images.githubusercontent.com/118057504/234226734-320aee01-7024-4cf8-96e7-3a66606384b3.png)
+
+Perform a <b>full join</b> with countries (left) and currencies (right).
+Filter for the North America region or NULL country names.
+<i>Hint</i>
+The WHERE clause can have multiple conditions, separated by AND or OR.
+field IS NULL can be used in a WHERE clause to filter for NULL values in a field.
+
+```
+SELECT name AS country, code, region, basic_unit
+FROM countries
+-- Join to currencies
+FULL JOIN currencies 
+USING (code)
+-- Where region is North America or name is null
+WHERE region = 'North America' OR name IS NULL
+ORDER BY region;
+```
+![image](https://user-images.githubusercontent.com/118057504/234235429-e478ef28-6f3c-43b0-8b09-6cd2211bfbe3.png)
+
+Repeat the same query as before, turning your full join into a <b>left join</b> with the currencies table.
+Have a look at what has changed in the output by comparing it to the full join result.
+
+```
+SELECT name AS country, code, region, basic_unit
+FROM countries
+-- Join to currencies
+LEFT JOIN currencies
+USING (code)
+WHERE region = 'North America' 
+	OR name IS NULL
+ORDER BY region;
+```
+![image](https://user-images.githubusercontent.com/118057504/234235800-00939207-1808-447e-a2eb-c9027483e497.png)
+
+Repeat the same query again, this time performing an <b>inner join</b> of countries with currencies.
+Have a look at what has changed in the output by comparing it to the full join and left join results!
+
+```
+SELECT name AS country, code, region, basic_unit
+FROM countries
+-- Join to currencies
+INNER JOIN currencies
+USING (code)
+WHERE region = 'North America' 
+	OR name IS NULL
+ORDER BY region;
+```
+![image](https://user-images.githubusercontent.com/118057504/234236340-b2ce558f-00ed-45da-9218-428fd9d1eaeb.png)
+
+
