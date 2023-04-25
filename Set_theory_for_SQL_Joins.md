@@ -34,10 +34,12 @@ For all set operations, the number of selected columns and their respective data
 ## 8. UNION and UNION ALL syntax
 
 The result will only use field names (or aliases, if used) of the first SELECT statement in the query.
+![image](https://user-images.githubusercontent.com/118057504/234403934-b2b3f364-f198-4760-b799-af837e0db465.png)
 
 ## 9. To the monarchs table
 
 We now return to our world leaders example. In this example, we use one more table from our leaders database: the monarchs table. Of course, this table is only a sample of monarchs, and not a comprehensive list of monarchs across the world.
+![image](https://user-images.githubusercontent.com/118057504/234404109-2042663b-5d7f-4e94-912f-d166fac71f8d.png)
 
 ## 10. Prime ministers, meet the monarchs
 
