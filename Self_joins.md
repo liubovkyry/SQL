@@ -5,15 +5,25 @@ We'll now dive into a special kind of join, where a table is joined with itself.
 
 ## 2. Self joins
 
-Joining a table to itself may seem like an unusual thing to do. Why would we want to do that? Self joins are used to compare values from part of a table to other values from within the same table. Recall the prime_ministers table from earlier. Suppose all prime ministers are convening in summits on their own continents. We want to create a new table showing all countries in the same continent as pairs.
+Joining a table to itself may seem like an unusual thing to do. Why would we want to do that? Self joins are used to compare values from part of a table to other values from within the same table. Recall the prime_ministers table from earlier. Suppose all prime ministers are convening in summits on their own continents.<i> We want to create a new table showing all countries in the same continent as pairs.</i>
+![image](https://user-images.githubusercontent.com/118057504/234260472-ce3282ac-23a2-4bc3-b494-7ccbe560ccea.png)
+
 
 ## 3. Prime minister, meet prime minister
 
-Self joins don't have dedicated syntax as other joins we have seen do. We can't just write SELF JOIN in SQL code, for example. In addition, aliasing is required for a self join. Let's look at a chunk of INNER JOIN code using the prime_ministers table. The country column is selected twice, and so is the continent column. The prime_ministers table is on both the left and the right of the JOIN, making this both a self join and an INNER JOIN! The vital step here is setting the joining fields which we use to match the table to itself. For each country, we will find multiple matched countries in the right table, since we are joining on continent. Each of these matched countries will be returned as pairs. Since this query will return several records, we use LIMIT to return only the first 10 records.
+<b>Self joins don't have dedicated syntax</b> as other joins we have seen do. We can't just write SELF JOIN in SQL code, for example. In addition, aliasing is required for a self join.
+Let's look at a chunk of INNER JOIN code using the prime_ministers table. The country column is selected twice, and so is the continent column. The prime_ministers table is on both the left and the right of the JOIN, making this both a self join and an INNER JOIN! The vital step here is setting the joining fields which we use to match the table to itself. For each country, we will find multiple matched countries in the right table, since we are joining on continent. Each of these matched countries will be returned as pairs. Since this query will return several records, we use LIMIT to return only the first 10 records.
+![image](https://user-images.githubusercontent.com/118057504/234261002-cf4c984e-8d94-47d1-bea2-4dbe5fe0b688.png)
+
+![image](https://user-images.githubusercontent.com/118057504/234261333-d50a1192-b018-4195-94de-dc04128bd026.png)
 
 ## 4. Prime minister, meet prime minister
 
 The results are a pairing of each country with every other country in the same continent. However, note that our join also paired countries with themselves, since they too are in the same continent as themselves. We don't want to include these, since a leader from Portugal does not need to meet with themselves, for example. Let's fix this.
+![image](https://user-images.githubusercontent.com/118057504/234261588-1d4f90e0-12c8-4b31-8178-aea454ed5bfd.png)
+![image](https://user-images.githubusercontent.com/118057504/234261665-f5ce7209-c9b1-4932-aedb-f1ba29ccdd32.png)
+
+
 
 ## 5. Prime minister, meet prime minister
 
