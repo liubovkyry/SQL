@@ -123,24 +123,45 @@ INTERSECT takes two tables as input, and returns only the records that exist in 
 
 In the diagram shown, we have two tables, left_table and right_table. The result of performing INTERSECT on these tables is only the records common to both tables: the first record. All records that are not of interest to the INTERSECT operation are faded out.
 
+![image](https://user-images.githubusercontent.com/118057504/234633689-0bc2d5a6-c6a4-4da5-baab-1844023b2650.png)
+
 ## 3. INTERSECT syntax
 
 The syntax for this set operation is very similar to that of UNION and UNION ALL. We perform a SELECT statement on our first table, a SELECT statement on our second table, and specify our set operator between them.
+
+![image](https://user-images.githubusercontent.com/118057504/234633940-ef906deb-628c-4cdd-a368-5ebf08f20506.png)
 
 ## 4. INTERSECT vs. INNER JOIN on two columns
 
 Let's compare INTERSECT to performing an INNER JOIN on two fields with identical field names. Similar to UNION, for a record to be returned, INTERSECT requires all fields to match, since in set operations we do not specify any fields to match on. This is also why it requires the left and right table to have the same number of columns in order to compare records. In the figure shown, only records where both columns match are returned. In INNER JOIN, similar to INTERSECT, only results where both fields match are returned. INNER JOIN will return duplicate values, whereas INTERSECT will only return common records once. As we know from earlier lessons, INNER JOIN will add more columns to the result set.
 
+![image](https://user-images.githubusercontent.com/118057504/234634202-469e0de1-0ad4-47a2-bd83-7aa806c81a87.png)
+
 ## 5. Countries with prime ministers and presidents
 
 Let's have a look at how we can use INTERSECT to determine all countries that have both a prime minister and a president. Each SELECT statement in our query has the same number of columns, of identical data types, in order for the set operation to be performed. The result of the query is the four countries with both a prime minister and a president in our leaders database. As with UNION, the result set uses the field names provided for the left table, whether aliased or not.
 
+![image](https://user-images.githubusercontent.com/118057504/234634461-0d94f7d4-b61a-4c8b-98a3-802eb2946863.png)
+
 ## 6. INTERSECT on two fields
 
 Next, let's think about what would happen if we selected two columns, country and prime_minister, instead of just country, as in our previous example. The code shown does just that. What will the result of this query be? Will this also give us the names of countries that have both a prime minister and a president? The actual result is an empty table. Why is that? As we saw in our INTERSECT diagrams, INTERSECT requires data from both fields in the left table to match their corresponding fields in the right table. The search did not find any countries where the prime minister and president share the same name.
+![image](https://user-images.githubusercontent.com/118057504/234634765-f4d69da6-4f89-4aa6-ada4-c054dbdcf9e9.png)
+
 
 ## 7. Countries with prime ministers and monarchs
 
 However, recall that there are monarchs in our database who also act as prime_ministers. In the example shown, performing an INTERSECT on the prime_ministers and monarchs tables using both country and leader name does not return an empty result.
+![image](https://user-images.githubusercontent.com/118057504/234635990-7d37dd55-7b70-42e7-b7ab-de84b5a92730.png)
 
 ## Let's practice
+
+Let's say you are interested in those countries that share names with cities. Use this task as an opportunity to show off your knowledge of set theory in SQL!
+```
+SELECT name
+FROM countries
+INTERSECT
+SELECT name
+FROM cities
+```
+![image](https://user-images.githubusercontent.com/118057504/234639098-2ba68145-c4cf-41d9-85f4-c91055cd5b45.png)
