@@ -1,24 +1,5 @@
-# Joining Data in SQL
 
-Course Description
-
-Joining data is an essential skill which enables us to draw information from separate tables together into a single, meaningful set of results. Learn to supercharge your queries using table joins and relational set theory in this course on joining data.
-
-In this course, you’ll learn how to:
-
-✓ Work with more than one table in SQL
-
-✓ Use inner joins, outer joins and cross joins
-
-✓ Leverage set theory, including unions, intersect, and except clauses
-
-✓ Create nested queries
-
-Every step is accompanied by exercises and opportunities to apply the theory and grow your confidence in SQL.
-## 1 Introducing Inner Joins
-## 2 Outer Joins, Cross Joins and Self Joins
-## 3 Set Theory for SQL Joins
-## 4 Subqueries
+## Subqueries
 
 ### Subquerying with semi joins and anti joins
 
