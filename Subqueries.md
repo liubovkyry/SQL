@@ -78,6 +78,38 @@ How might we adapt our semi join to determine countries in the Americas founded 
 
 ##  Let's practice!
 
+### Semi join
+
+Let's say you are interested in identifying languages spoken in the Middle East. The languages table contains information about languages and countries, but it does not tell you what region the countries belong to. You can build up a semi join by filtering the countries table by a particular region, and then using this to further filter the languages table.
+
+Select country code as a single field from the countries table, filtering for countries in the 'Middle East' region.
+```
+Select code
+FROM countries
+WHERE region = 'Middle East';
+```
+![image](https://user-images.githubusercontent.com/118057504/234660620-00372d61-1a15-4d6e-8254-22d1a4b29863.png)
+
+Write a second query to SELECT the name of each unique language appearing in the languages table; do not use column aliases here.
+Order the result set by name in ascending order.
+```
+SELECT DISTINCT(name)
+FROM languages
+ORDER BY name ASC;
+```
+![image](https://user-images.githubusercontent.com/118057504/234660831-33da8739-6fc8-44c1-9643-13e6b984ad7f.png)
+
+Create a semi join out of the two queries you've written, which filters unique languages returned in the first query for only those languages spoken in the 'Middle East'.
+```
+SELECT DISTINCT name
+FROM languages
+WHERE code IN
+    (SELECT code
+    FROM countries
+    WHERE region = 'Middle East')
+ORDER BY name;
+```
+![image](https://user-images.githubusercontent.com/118057504/234661065-7d159a1b-92fa-4ef5-b761-731ef181e9ef.png)
 
 
 
