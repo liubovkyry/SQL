@@ -111,6 +111,44 @@ ORDER BY name;
 ```
 ![image](https://user-images.githubusercontent.com/118057504/234661065-7d159a1b-92fa-4ef5-b761-731ef181e9ef.png)
 
+### Diagnosing problems using anti join
+ The anti join is a related and powerful joining tool. It can be particularly useful for identifying whether an incorrect number of records appears in a join.
+
+Say you are interested in identifying currencies of Oceanian countries. You have written the following INNER JOIN, which returns 15 records. Now, you want to ensure that all Oceanian countries from the countries table are included in this result. You'll do this in the first step.
+```
+SELECT c1.code, name, basic_unit AS currency
+FROM countries AS c1
+INNER JOIN currencies AS c2
+ON c1.code = c2.code
+WHERE c1.continent = 'Oceania';
+```
+![image](https://user-images.githubusercontent.com/118057504/234662482-9dbc85c2-692e-451b-b1cf-56bf3b2d1233.png)
+ Tuvalu has two currencies, and therefore shows up twice in the INNER JOIN? This is why the INNER JOIN returned 15 rather than 14 results.
+ 
+
+If there are any Oceanian countries excluded in this INNER JOIN, you want to return the names of these countries. You'll write an anti join to this in the second step!
+Begin by writing a query to return the code and name (in order, not aliased) for all countries in the continent of Oceania from the countries table.
+Observe the number of records returned and compare this with the provided INNER JOIN, which returns 15 records.
+```
+SELECT code, name
+FROM countries
+WHERE continent = 'Oceania';
+```
+![image](https://user-images.githubusercontent.com/118057504/234662826-3fbb4268-d01a-47fd-a424-0e7ee4300a62.png)
+
+Now, build on your query to complete your anti join, by adding an additional filter to return every country code that is not included in the currencies table.
+
+```
+SELECT code, name
+FROM countries
+WHERE continent = 'Oceania'
+-- Filter for countries not included in the bracketed subquery
+  AND code NOT IN
+    (SELECT code
+    FROM currencies);
+```
+![image](https://user-images.githubusercontent.com/118057504/234663345-58d077f8-d746-4924-8ae6-bfc58e6f639b.png)
+
 
 
 
