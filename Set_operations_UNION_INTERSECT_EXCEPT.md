@@ -165,3 +165,39 @@ SELECT name
 FROM cities
 ```
 ![image](https://user-images.githubusercontent.com/118057504/234639098-2ba68145-c4cf-41d9-85f4-c91055cd5b45.png)
+
+
+
+# EXCEPT
+
+## 1. EXCEPT Venn diagram
+
+EXCEPT allows us to identify the records that are present in one table, but not the other. More specifically, <i>it retains only records from the left table that are not present in the right table.</i>
+
+## 2. EXCEPT diagram
+
+The diagram shown illustrates the workings of the EXCEPT operation. All records that are not of interest to the EXCEPT operation are faded out. Only the last two records of the left_table are returned. Note that while the id 4 does exist in the right_table, the whole record does not match, which is why the last record of left_table is not faded out.
+![image](https://user-images.githubusercontent.com/118057504/234639935-ae469c07-3ef1-41cd-8a1c-089f357140fd.png)
+
+
+## 3. EXCEPT syntax
+
+We saw earlier that there are some monarchs that also act as the prime minister for their country. Let's say we were interested in monarchs that do NOT also hold the title of prime minister. The EXCEPT clause is really handy for this! The SQL code shown selects the monarch and country field from monarchs and then looks for common entries in the prime_minister and country fields in the prime_ministers table, looking to exclude those entries. In the result, we see only the three monarchs from our leaders database who do not also serve the role of prime minister.
+![image](https://user-images.githubusercontent.com/118057504/234640383-4d7e2e56-2d91-4b8c-8c5a-3abb053416d6.png)
+
+## Let's practice!
+Just as you were able to leverage INTERSECT to find the names of cities with the same names as countries, you can also do the reverse, using EXCEPT.
+
+In this exercise, you will find the names of cities that <b>do not</b> have the same names as their countries.
+
+```
+-- Return all cities that do not have the same name as a country
+SELECT name
+FROM cities
+EXCEPT
+SELECT name
+FROM countries
+ORDER BY name;
+```
+![image](https://user-images.githubusercontent.com/118057504/234641221-923ee85f-540d-4ae4-98e8-f64bec428c19.png)
+
