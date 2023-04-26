@@ -44,17 +44,72 @@ We now return to our world leaders example. In this example, we use one more tab
 ## 10. Prime ministers, meet the monarchs
 
 We can use UNION on the monarchs and prime_ministers tables to show all the different prime ministers and monarchs in these two tables. Note that the monarch field has been aliased as 'leader'. As we have learned, the monarch and prime_minister fields will be combined under the leader field, even though we only aliased the monarch field. We'll LIMIT to the first 10 results so that they fit on our screen.
+![image](https://user-images.githubusercontent.com/118057504/234621325-0b7404a8-b8de-448d-a647-a5cdb56defbf.png)
+
 
 ## 11. After the UNION
 
 Our UNION returns the top 10 monarchs, prime_ministers and their corresponding countries. Does something stand out here? Recall that the monarchs for Oman and Brunei are also prime ministers. UNION only lists them once each, because they are the same person. Norway is listed twice, however, because its monarch and prime minister are different people.
 
+![image](https://user-images.githubusercontent.com/118057504/234621757-8f3a4119-3dad-47f2-8577-ab510aae58d6.png)
+
+
 ## 12. UNION ALL with the leaders
 
 This is where a UNION ALL is helpful! A UNION ALL will tell us if there are any monarchs who also act as prime ministers. The syntax for this is shown.
+![image](https://user-images.githubusercontent.com/118057504/234622332-e4456c78-80bd-435b-9184-f726038150b3.png)
 
 ## 13. UNION ALL result
 
 After UNION ALL, Brunei and Oman are now listed twice.
+![image](https://user-images.githubusercontent.com/118057504/234622492-1d6a3fbf-9355-4c2d-a629-94480c42472f.png)
+
 
 ## 14. Let's practice!
+
+### Comparing global economies
+
+In this exercise, you have two tables, economies2015 and economies2019, available to you under the tabs in the console. You'll perform a set operation to stack all records in these two tables on top of each other,<i> excluding duplicates.</i>
+
+When drafting queries containing set operations, it is often helpful to write the queries on either side of the operation first, and then call the set operator. The instructions are ordered accordingly.
+
+Begin your query by selecting all fields from economies2015.
+Create a second query that selects all fields from economies2019.
+Perform a set operation to combine the two queries you just created, ensuring you do not return duplicates.
+
+```
+-- Select all fields from economies2015
+SELECT *
+FROM economies2015   
+-- Set operation
+UNION
+-- Select all fields from economies2019
+SELECT *
+FROM economies2019
+ORDER BY code, year;
+```
+![image](https://user-images.githubusercontent.com/118057504/234624173-ce7a79ea-6ae6-41ef-9141-7180fcb04ce3.png)
+
+### Comparing two set operations
+```
+SELECT code AS country_code, year
+FROM economies
+UNION
+SELECT country_code, year
+FROM populations
+ORDER by country_code, year;
+```
+![image](https://user-images.githubusercontent.com/118057504/234624776-d8ca83fa-9a1f-4a45-abce-1be92a552e1e.png)
+
+```
+SELECT code, year
+FROM economies
+-- Set theory clause
+UNION ALL
+SELECT country_code, year
+FROM populations
+ORDER BY code, year;
+```
+
+![image](https://user-images.githubusercontent.com/118057504/234624683-5bf891b7-de5e-43db-8986-2aa444f0d448.png)
+
