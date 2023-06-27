@@ -7,3 +7,4 @@ Values can be converted temporarily from one type to another through a process c
 ## Casting with ::
 
 There's an alternate notation for casting values: a double colon. It does the same thing as the cast function, but it's more compact. Put the value to convert before the double colon and the type to cast it as after the double colon. The examples here are the same as those on the previous slide, except with the double colon notation instead of the cast function.
+![image](https://github.com/liubovkyry/SQL/assets/118057504/298fc21f-27cd-4982-a8fc-75229b486fde)
