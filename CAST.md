@@ -8,3 +8,29 @@ Values can be converted temporarily from one type to another through a process c
 
 There's an alternate notation for casting values: a double colon. It does the same thing as the cast function, but it's more compact. Put the value to convert before the double colon and the type to cast it as after the double colon. The examples here are the same as those on the previous slide, except with the double colon notation instead of the cast function.
 ![image](https://github.com/liubovkyry/SQL/assets/118057504/298fc21f-27cd-4982-a8fc-75229b486fde)
+
+```
+SELECT '3.2'::numeric,
+       '-123'::numeric,
+       '1e3'::numeric,
+       '1e-3'::numeric,
+       '02314'::numeric,
+       '0002'::numeric;
+```
+
+![image](https://github.com/liubovkyry/SQL/assets/118057504/5970b9b7-fd0e-4290-b325-3c1b0e26e500)
+
+```
+-- Select the original value
+SELECT profits_change, 
+	   -- Cast profits_change
+       CAST(profits_change AS integer) AS profits_change_int
+  FROM fortune500;
+ ```
+
+![image](https://github.com/liubovkyry/SQL/assets/118057504/dd374061-6377-4a6a-b9e1-c15a3b1e0a50)
+
+
+ 
+
+
